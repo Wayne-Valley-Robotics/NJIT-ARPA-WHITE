@@ -16,6 +16,17 @@ void setup()
   //   prizm.setRedLED(HIGH);
   // }
   drive_interface::initMotors();
+
+  if (!PS4::poll())
+  {
+    Serial.println("Waiting for controller...");
+    // wait for first input
+    while (!PS4::poll())
+    {
+      delay(200);
+    }
+  }
+  Serial.println("Controller Connected!");
 }
 
 void loop()

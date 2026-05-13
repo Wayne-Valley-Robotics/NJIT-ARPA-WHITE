@@ -3,10 +3,10 @@
 
 namespace PS4
 {
-    void poll()
+    bool poll()
     {
         // recieve new data, and process if available
-        DATA::receiveData();
+        return DATA::receiveData();
         // process/abstract new data
     }
 

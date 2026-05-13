@@ -3,7 +3,7 @@
 
 namespace PS4
 {
-    void poll();
+    bool poll();
 
     namespace DATA
     {
