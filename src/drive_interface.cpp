@@ -2,10 +2,12 @@
 namespace drive_interface
 {
 
-    // encoder pins must be capable of interrupts.
     /*
+    encoder pin A must be capable of interrupts.
+    
     there are six interrupt pins on the arduino mega: 2, 3, 18, 19, 20, 21
-    pins 20 & 21 are not available to use for interrupts while they are used for I2C communication; they also have external pull-ups that cannot be disabled
+    pins 20 & 21 are not available to use for interrupts while they are in use for I2C (we aren't using them for that at the moment)
+    most notably though they also have **external pull-ups that cannot be disabled**
 
     only encoderPinA needs to be an interrupt pin!
     */

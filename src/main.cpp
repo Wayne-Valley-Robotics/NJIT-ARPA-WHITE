@@ -1,7 +1,7 @@
 #include "Arduino.h"
 // #include "battery.h"
 #include "inputs_interface.h"
-#include "drive_interface.h" // it be nice if these things ran after setup() somehow
+#include "drive_interface.h"
 
 void setup()
 {
@@ -9,12 +9,11 @@ void setup()
   Serial.begin(115200);
   PS4::DATA::init();
 
-  // int batteryWarnLevel = batteryCheck();
-  // if (batteryWarnLevel >= 3)
-  // {
-  //   Serial.println("Battery level low. Warning level " + batteryWarnLevel);
-  //   prizm.setRedLED(HIGH);
-  // }
+  // TODO: implement some kind of battery check to make sure the battery is charged. there are no safe-guards for this
+  // and in the worst case scenario everything could look fine, until you try to drive all the motors at once and the
+  // whole system browns out. maybe it's also a good idea to implement some kind of connectivity check with the controller?
+  // the inputs shouldn't update (PS4::poll() == false) if the controller isn't connected. then stop motors or smth idk
+
   drive_interface::initMotors();
 
   if (!PS4::poll())

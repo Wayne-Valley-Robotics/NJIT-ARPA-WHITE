@@ -6,8 +6,8 @@ class MOTOR
 private:
     uint8_t pin;
     uint8_t invertMultiplier;
-    uint8_t encoderPinA;
-    uint8_t encoderPinB;
+    uint8_t encoderPinA; // this must be connected to an interrupt pin
+    uint8_t encoderPinB; // connect to any digital pin
     void (*encoderISR)();
     volatile long encoderCount;
     bool encoderDirection; // true for forward, false for backward
