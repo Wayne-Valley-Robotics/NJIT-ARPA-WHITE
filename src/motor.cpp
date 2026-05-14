@@ -60,22 +60,23 @@ long MOTOR::getEncoderCount()
 {
     return encoderCount;
 }
-void MOTOR::readEncoder()
+void MOTOR::readEncoder() // called every time pin A changes
 {
+    // cache encoder pin values
     // bool a = digitalRead(encoderPinA);
-    // bool b = digitalRead(encoderPinB);
-    // // a1 b0 == forward
-    // // a0 b1 == backward
-    // if (a && !b)
-    // {
-    //     encoderCount++;
-    //     encoderDirection = true;
-    // }
-    // else if (!a && b)
-    // {
-    //     encoderCount--;
-    //     encoderDirection = false;
-    // }
+    bool b = digitalRead(encoderPinB);
+    // a1 b0 == forward
+    // a0 b1 == backward
+    if (b)
+    {
+        encoderCount++;
+        // encoderDirection = true; // waste of cpu cycles
+    }
+    else
+    {
+        encoderCount--;
+        // encoderDirection = false;
+    }
 }
 
 void MOTOR::resetEncoder()
