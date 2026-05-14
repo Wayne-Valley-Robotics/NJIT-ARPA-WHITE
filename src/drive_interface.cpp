@@ -40,6 +40,9 @@ namespace drive_interface
 
     /*      Directions:     */
 
+    // I'm not sure how the different algorithms would interact with this. it feels too dumb almost...
+    // idk it's up to you lol
+    // feel free to scrap the functions below
     void forward(int power)
     {
         m1.setPower(power);
@@ -56,4 +59,5 @@ namespace drive_interface
     }
 
     // TODO: add other directions, like strafing and rotating
+
 }

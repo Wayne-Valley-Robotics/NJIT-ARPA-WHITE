@@ -32,6 +32,6 @@ void setup()
 void loop()
 {
   PS4::poll();
-  if (PS4::Square)
+  if (PS4::Square())
     drive_interface::forward(255);
 }
