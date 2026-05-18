@@ -62,6 +62,7 @@ long MOTOR::getEncoderCount()
 }
 void MOTOR::readEncoder() // called every time pin A changes
 {
+    static int numReadTimes;
     // cache encoder pin values
     // bool a = digitalRead(encoderPinA);
     bool b = digitalRead(encoderPinB);
@@ -77,9 +78,40 @@ void MOTOR::readEncoder() // called every time pin A changes
         encoderCount--;
         // encoderDirection = false;
     }
+
+    if (numReadTimes >= 5) // change if needed
+    {
+        cacheEncoderValue();
+        numReadTimes = 0;
+    }
+    else
+    {
+        numReadTimes++;
+    }
 }
 
 void MOTOR::resetEncoder()
 {
     encoderCount = 0;
+}
+
+long MOTOR::getEncoderSpeed()
+{
+    // subtract arduino's millis timer from timestamp to determine time
+    static unsigned long timestamp;
+    unsigned long currentTime = millis();
+    unsigned long delta = currentTime - timestamp; // change in time
+    timestamp = currentTime;
+
+    long encoderSpeed;
+    long currentEncoderCount = getEncoderCount();
+    long encoderDisplacement = currentEncoderCount - cachedEncoderCount;
+
+    encoderSpeed = (encoderDisplacement * 1000L) / delta; // ticks per second
+    return encoderSpeed;
+}
+
+void MOTOR::cacheEncoderValue()
+{
+    cachedEncoderCount = getEncoderCount();
 }

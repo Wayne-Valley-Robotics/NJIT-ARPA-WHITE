@@ -12,6 +12,7 @@ private:
     void (*encoderISR)();
     volatile long encoderCount;
     bool encoderDirection; // true for forward, false for backward
+    long cachedEncoderCount;
 
 public:
     MOTOR(int pwm, int dir, bool invert, int encoderPinA, int encoderPinB, void (*encoderISR)());
@@ -27,4 +28,7 @@ public:
     long getEncoderCount();
     void readEncoder();
     void resetEncoder();
+    long getEncoderSpeed();
+    void cacheEncoderValue();
 };
+
